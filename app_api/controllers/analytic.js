@@ -84,6 +84,7 @@ const getRevenueAYearBeforeToday = async (req, res) => {
     ]);
     if (carts && carts.length > 0) {
       const today = new Date();
+      const month = today.getMonth();
       let lastYearCarts = carts.filter(cart => cart.paidDate.getFullYear() == today.getFullYear() - 1);
       let thisYearCarts = carts.filter(cart => cart.paidDate.getFullYear() == today.getFullYear());
       lastYearCarts = lastYearCarts.sort((a, b) => a.paidDate.getMonth() - b.paidDate.getMonth());
@@ -93,27 +94,39 @@ const getRevenueAYearBeforeToday = async (req, res) => {
       
       let revenues = [];
 
-      for (let cartIndex = 0; cartIndex < lastYearCarts.length; cartIndex++) {
-        const cart = lastYearCarts[cartIndex];
-        const month = cart.paidDate.getMonth();
-        const foundMonth = revenues.find(c => c.name == month);
-        if (foundMonth) foundMonth.value++;
-        else revenues.push({name: month, value: 1});
+      for (let monthIndex = month + 1; monthIndex < 12; monthIndex++) {
+        const carts = lastYearCarts.filter(cart => cart.paidDate.getMonth() == monthIndex);
+        if (carts.length == 0) revenues.push({name: monthIndex, value: 0});
+        else revenues.push({name: monthIndex, value: carts.reduce((acc, curr) => acc + curr.totalAfterPromoted, 0)});
       }
 
-      for (let cartIndex = 0; cartIndex < thisYearCarts.length; cartIndex++) {
-        const cart = thisYearCarts[cartIndex];
-        const month = cart.paidDate.getMonth();
-        const foundMonth = revenues.find(c => c.name == month);
-        if (foundMonth) foundMonth.value++;
-        else revenues.push({name: month, value: 1});
+      for (let monthIndex = 0; monthIndex < month + 1; monthIndex++) {
+        const carts = thisYearCarts.filter(cart => cart.paidDate.getMonth() == monthIndex);
+        if (carts.length == 0) revenues.push({name: monthIndex, value: 0});
+        else revenues.push({name: monthIndex, value: carts.reduce((acc, curr) => acc + curr.totalAfterPromoted, 0)});
       }
+
+      // for (let cartIndex = 0; cartIndex < lastYearCarts.length; cartIndex++) {
+      //   const cart = lastYearCarts[cartIndex];
+      //   const month = cart.paidDate.getMonth();
+      //   const foundMonth = revenues.find(c => c.name == month);
+      //   if (foundMonth) foundMonth.value += cart.totalAfterPromoted;
+      //   else revenues.push({name: month, value: cart.totalAfterPromoted});
+      // }
+
+      // for (let cartIndex = 0; cartIndex < thisYearCarts.length; cartIndex++) {
+      //   const cart = thisYearCarts[cartIndex];
+      //   const month = cart.paidDate.getMonth();
+      //   const foundMonth = revenues.find(c => c.name == month);
+      //   if (foundMonth) foundMonth.value += cart.totalAfterPromoted;
+      //   else revenues.push({name: month, value: cart.totalAfterPromoted});
+      // }
 
       const months = [ "January", "February", "March", "April", "May", "June", 
       "July", "August", "September", "October", "November", "December" ];
 
       for (let index = 0; index < revenues.length; index++) {
-        revenues[index].name = months[index];
+        revenues[index].name = months[revenues[index].name];
       }
 
       res.status(200).json({revenues});
@@ -176,6 +189,7 @@ const getTrendTagsDataV2 = async (req, res) => {
     if (!carts || carts.length == 0) return res.status(404).json({'message': 'No carts found.'});
     else {
       const today = new Date();
+      const month = today.getMonth();
       let lastYearCarts = carts.filter(cart => cart.paidDate.getFullYear() == today.getFullYear() - 1);
       let thisYearCarts = carts.filter(cart => cart.paidDate.getFullYear() == today.getFullYear());
       lastYearCarts = lastYearCarts.sort((a, b) => a.paidDate.getMonth() - b.paidDate.getMonth());
@@ -235,9 +249,11 @@ const getTrendTagsDataV2 = async (req, res) => {
           const tag = topTenTags[tagIndex];
           const foundSeries = tag.series.find(s => s.name == months[cart.paidDate.getMonth()]);
           if (!foundSeries) tag.series.push({ name: months[cart.paidDate.getMonth()], value: 0});
-        }        
+        }
       }
+
       
+
       res.status(200).json(topTenTags);
     }
   });
