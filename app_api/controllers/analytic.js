@@ -188,8 +188,20 @@ const getTrendTagsDataV2 = async (req, res) => {
     ]);
     if (!carts || carts.length == 0) return res.status(404).json({'message': 'No carts found.'});
     else {
+      const months = [ "January", "February", "March", "April", "May", "June", 
+      "July", "August", "September", "October", "November", "December" ];
+
       const today = new Date();
       const month = today.getMonth();
+
+      topTenTags.forEach(tag => {
+        for (let monthIndex = month + 1; monthIndex < 12; monthIndex++) {
+          tag.series.push({name: months[monthIndex], value: 0});
+        }
+        for (let monthIndex = 0; monthIndex <= month; monthIndex++) {
+          tag.series.push({name: months[monthIndex], value: 0});
+        }
+      });
       let lastYearCarts = carts.filter(cart => cart.paidDate.getFullYear() == today.getFullYear() - 1);
       let thisYearCarts = carts.filter(cart => cart.paidDate.getFullYear() == today.getFullYear());
       lastYearCarts = lastYearCarts.sort((a, b) => a.paidDate.getMonth() - b.paidDate.getMonth());
@@ -197,9 +209,6 @@ const getTrendTagsDataV2 = async (req, res) => {
       lastYearCarts = lastYearCarts.filter((a, b) => a.paidDate.getMonth() > today.getMonth());
       thisYearCarts = thisYearCarts.filter((a, b) => a.paidDate.getMonth() <= today.getMonth());
       
-      const months = [ "January", "February", "March", "April", "May", "June", 
-      "July", "August", "September", "October", "November", "December" ];
-
       for (let cartIndex = 0; cartIndex < lastYearCarts.length; cartIndex++) {
         const cart = lastYearCarts[cartIndex];
         for (let itemIndex = 0; itemIndex < cart.items.length; itemIndex++) {
@@ -251,9 +260,7 @@ const getTrendTagsDataV2 = async (req, res) => {
           if (!foundSeries) tag.series.push({ name: months[cart.paidDate.getMonth()], value: 0});
         }
       }
-
       
-
       res.status(200).json(topTenTags);
     }
   });
