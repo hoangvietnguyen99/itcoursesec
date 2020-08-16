@@ -1,0 +1,13 @@
+.btn-add {
+  color: white;
+  background-color: palevioletred;
+  border-radius: 5px;
+  font-weight: bold;
+}
+.btn-add:hover {
+  background-color: rgb(226, 86, 133);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+.cursor-pointer{
+  cursor: pointer;
+}

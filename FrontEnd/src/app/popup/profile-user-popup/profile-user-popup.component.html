@@ -1,0 +1,81 @@
+<div class="modal-header">
+  <div class="modal-title">
+    <label class="modal-title pull-left h5">Profile</label>
+  </div>
+  <button type="button" class="close pull-right" aria-label="Close"  (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body" *ngIf="user">
+  <div class="container-fluid my-2">
+    <div class="row">
+      <div class="col-4 text-muted">Fullname:</div>
+      <div class="col-8 font-italic">{{ user.name }}</div>
+    </div>
+    <div class="row">
+      <div class="col-4 text-muted">Email:</div>
+      <div class="col-8 font-italic">{{ user.email }}</div>
+    </div>
+    <div class="row">
+      <div class="col-4 text-muted">Total Purchased Course:</div>
+      <div class="col-8 font-italic">{{ user.purchasedCourseIds.length }}</div>
+    </div>
+    <div class="row">
+      <div class="col-4 text-muted">Total Spent:</div>
+      <div class="col-8 font-italic">{{ user.totalSpend }} VND</div>
+    </div>
+    <div class="row">
+      <div class="col-4 text-muted">User's Tags:</div>
+      <div class="col-8 font-italic">
+        <span *ngFor="let tag of user.tags">{{ tag }}, </span>
+      </div>
+    </div>
+    <hr />
+    <div class="row w-100" *ngIf="loading">
+      <div class="lds-roller col-auto mx-auto">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <div class="row" *ngIf="!loading">
+      <div class="col-12">
+        <div class="table-responsive table-hover">
+          <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Course Name</th>
+                <th scope="col">Tags</th>
+                <th scope="col">Upload Date</th>
+                <th scope="col">Price(VND)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let course of lsCourses; index as i"
+                style="cursor: pointer;"
+              >
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ course.name }}</td>
+                <td>
+                  <span *ngFor="let tag of course.tags">{{ tag }}, </span>
+                </td>
+                <td>{{ course.uploadDate | date: "MMM d, y, h:mm:ss a" }}</td>
+                <td>{{ course.price }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-success" (click)="bsModalRef.hide()">Cancel</button>
+</div>

@@ -1,0 +1,30 @@
+@import "../../styles.scss";
+.my-color {
+  color: $color-main;
+}
+.card-deck a {
+  color: $color-main;
+}
+.border-price {
+  border: 1px solid red;
+  border-radius: 4px;
+  p {
+    margin-top: 0.5rem;
+  }
+}
+.border-price:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+.btn-search {
+  background-color: whitesmoke;
+  border: 1px solid rgb(42, 58, 40);
+  border-radius: 5px;
+  color: rgb(42, 58, 40);
+  font-weight: bold;
+}
+.btn-search:hover {
+  border-color: palevioletred;
+  color: palevioletred;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+
+}

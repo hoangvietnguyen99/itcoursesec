@@ -1,0 +1,57 @@
+<div class="container-fluid mb-4">
+  <div class="row my-3 ">
+    <h1 class="col-12 text-center">Manage Courses</h1>
+  </div>
+  <div class="row">
+    <div class="col-auto ml-auto mt-2">
+      <button class="btn btn-add" (click)="showCreateCoursePopup()"><i class="fa fa-plus" aria-hidden="true"></i> Add Course</button>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive table-hover">
+        <table class="table table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">By Category</th>
+              <th scope="col">Course Name</th>
+              <th scope="col">Purchased Count <i class="fa fa-sort mx-2" aria-hidden="true"></i></th>
+              <th scope="col">Upload Date <i class="fa fa-sort mx-2" aria-hidden="true"></i></th>
+              <th scope="col">Collected (VND) <i class="fa fa-sort mx-2" aria-hidden="true"></i></th>
+              <th scope="col">Status</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let course of allCourses; index as i" class="cursor-pointer" (dblclick)="editCourse(course._id)">
+              <th scope="row">{{i+1}}</th>
+              <td>{{course.categoryId}}</td>
+              <td>{{course.name}}</td>
+              <td>{{course.purchasedCount}} </td>
+              <td>{{course.uploadDate | date:'MMM d, y, h:mm:ss a'}} </td>
+              <td>{{course.totalCollect}} </td>
+              <td>{{course.status}} </td>
+              <td>
+                <button class="btn btn-sm btn-success mx-1" (click)="editCourse(course._id)">
+                  <i class="fa fa-pencil"></i>
+                </button>
+                <button class="btn btn-sm btn-danger mx-1" (click)="openModal(isDelete)">
+                  <i class="fa fa-trash"></i>
+                </button>
+                <ng-template #isDelete>
+                  <div class="modal-body text-center">
+                    <p>Are you sure to delete this course?</p>
+                    <button type="button" class="btn btn-default" (click)="deleteCourse(course._id)">Yes</button>
+                    <button type="button" class="btn btn-primary" (click)="modalRef.hide()">No</button>
+                  </div>
+                </ng-template>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

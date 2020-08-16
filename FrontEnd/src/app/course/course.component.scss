@@ -1,0 +1,111 @@
+@import "../../styles.scss";
+.my-color {
+  color: rgb(58, 82, 56);
+}
+.btn-cart {
+  background-color: white;
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  border-radius: 5px;
+}
+
+.btn-cart:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+.rating {
+  color: $color-rate;
+  font-size: 25px;
+}
+.rating-user {
+  color: $color-rate;
+  font-size: 60px;
+}
+.rate-me {
+  border: 1px solid $color-rate;
+  border-radius: 5px;
+}
+.text-rate {
+  color: $color-rate;
+}
+.btn-search {
+  background-color: whitesmoke;
+  border: 1px solid rgb(42, 58, 40);
+  border-radius: 5px;
+  color: rgb(42, 58, 40);
+  font-weight: bold;
+}
+.btn-search:hover {
+  border-color: palevioletred;
+  color: palevioletred;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+.review {
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.videowrapper {
+  float: none;
+  clear: both;
+  width: 100%;
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  height: 0;
+}
+.videowrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.lesson-list {
+  border: 2px solid whitesmoke;
+  border-radius: 5px;
+}
+.lesson-list:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+.title-lesson {
+  color: $color-main;
+}
+.cursor-pointer {
+  cursor: pointer;
+  font-weight: bold;
+}
+.cursor-pointer:hover {
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  color: rgb(31, 118, 168);
+}
+
+.here{
+  padding: 3px;
+  border-radius: 5px;
+  background-color: white;
+}
+.scrollbar {
+  height: 700px;
+  overflow-y: scroll;
+  padding: 10px 15px;
+}
+.sbId::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #f5f5f5;
+  padding: 5px;
+}
+.sbId::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+.sbId::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}

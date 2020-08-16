@@ -1,0 +1,109 @@
+<div class="modal-header">
+  <div class="modal-title">
+    <label class="modal-title pull-left h5">Add Promotion</label>
+  </div>
+  <button
+    type="button"
+    class="close pull-right"
+    aria-label="Close"
+    (click)="bsModalRef.hide()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="container w-75 my-2">
+    <div class="row">
+      <div class="col">Code</div>
+    </div>
+    <div class="row">
+      <div class="col position-relative">
+        <input [class.error-date]="!newPromotion.code && isSubmit"
+          type="text"
+          class="form-control"
+          [(ngModel)]="newPromotion.code"
+        />
+        <div *ngIf="!newPromotion.code && isSubmit" class="invalid-tooltip">This field is required</div>
+      </div>
+    </div>
+
+    <div class="row my-2">
+      <div class="col-6">
+        <div class="row">
+          <div class="col">Start Date</div>
+        </div>
+        <div class="row">
+          <div class="col position-relative">
+            <input [class.error-date]="!newPromotion.start && isSubmit"
+              type="date"
+              class="form-control"
+              [(ngModel)]="newPromotion.start"
+              uib-datepicker-popup="MM/dd/yyyy"
+            />
+            <div *ngIf="!newPromotion.start  && isSubmit" class="invalid-tooltip">This field is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col">End Date</div>
+        </div>
+        <div class="row">
+          <div class="col position-relative">
+            <input [class.error-date]="!newPromotion.end && isSubmit"
+              type="date"
+              class="form-control"
+              [(ngModel)]="newPromotion.end"
+              [min]="newPromotion.start"
+            />
+            <div *ngIf="!newPromotion.end && isSubmit" class="invalid-tooltip">This field is required</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row my-2">
+      <div class="col-6">
+        <div class="row">
+          <div class="col">Discount percentage (%)</div>
+        </div>
+        <div class="row">
+          <div class="col position-relative">
+            <input [class.error-date]="newPromotion.discountPercent==0 && isSubmit"
+              type="number"
+              max="100"
+              min="0"
+              class="form-control"
+              [(ngModel)]="newPromotion.discountPercent"
+            />
+            <div *ngIf="newPromotion.discountPercent==0 && isSubmit" class="invalid-tooltip">This field is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col">Total time</div>
+        </div>
+        <div class="row">
+          <div class="col position-relative">
+            <input [class.error-date]="newPromotion.totalAmount==0 && isSubmit"
+              type="number"
+              min="0"
+              class="form-control"
+              [(ngModel)]="newPromotion.totalAmount"
+            />
+            <div *ngIf="newPromotion.totalAmount==0 && isSubmit" class="invalid-tooltip">This field is required</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-success" (click)="bsModalRef.hide()">
+    Cancel
+  </button>
+  <button type="button" class="btn btn-primary" (click)="submit()">
+    Submit
+  </button>
+</div>

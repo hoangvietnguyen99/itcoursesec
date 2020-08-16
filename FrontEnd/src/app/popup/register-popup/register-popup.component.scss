@@ -1,0 +1,19 @@
+@import '../../../styles.scss';
+.btn-style {
+  background-color: white;
+  color: #0a4377;
+  border-color: #0a4377;
+  border-radius: 2px;
+  font-weight: bold;
+  margin-right: 30px;
+  width: 150px;
+  @media screen and (max-width: 480px) {
+    margin-right: 10px;
+  }
+}
+.modal-header {
+  background-color: rgb(87, 119, 82);
+}
+.form-control{
+  width: auto !important;
+}

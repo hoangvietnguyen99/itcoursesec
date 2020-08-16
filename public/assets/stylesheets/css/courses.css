@@ -1,0 +1,12 @@
+.search button{
+    background-color: #E27C3E;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.container-fluid .row .col-lg-6{
+    padding: 0px;
+}
+.container-fluid .row .col-lg-2{
+    padding-right: 0px;
+}

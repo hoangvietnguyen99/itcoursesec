@@ -1,0 +1,281 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <!-- Begin card details -->
+      <div class="card" *ngIf="course">
+        <img
+          class="card-img-top"
+          style="max-height: 450px;"
+          src="../../assets/img/{{ course.imgPath }}"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <div class="row">
+            <h1
+              class="col-12 card-title text-center h4 mb-2 my-color"
+              *ngIf="course"
+            >
+              {{ course.name }}
+            </h1>
+            <rating
+              [ngModel]="course.rating"
+              class="col-auto rating"
+              [max]="maxRating"
+              [readonly]="isReadonlyView"
+            >
+            </rating>
+            <div class="col-auto mt-2">{{ course.rating }}</div>
+            <div class="col text-right mt-2">
+              <small class="text-muted" style="font-size: 15px;">
+                <i class="ion ion-clock"></i>
+                {{ course.uploadDate | date }}
+              </small>
+            </div>
+          </div>
+          <div class="row my-2">
+            <div class="col-auto">
+              <span class="font-weight-bold">Tags: </span>
+              <span *ngFor="let tag of course.tags"> {{ tag }},</span>
+            </div>
+          </div>
+          <div class="row my-2">
+            <div class="col-2 font-weight-bold">Description</div>
+            <div class="col-10">{{ course.description }}</div>
+          </div>
+          <div *ngIf="!course.lessons">
+            <div class="row font-weight-bold my-1 h4">
+              <div class="col-4 font-weight-bold">Price:</div>
+              <div class="col-8" *ngIf="course.price > 0">
+                {{ course.price }} VND
+              </div>
+              <div class="col-8" *ngIf="course.price == 0">FREE</div>
+            </div>
+            <div class="row my-2">
+              <div class="col-4 mx-auto">
+                <button *ngIf="course.price > 0"
+                  class="w-100 btn btn-cart font-weight-bold py-2"
+                  (click)="addCourseToCart(course._id)"
+                >
+                  Add To Cart
+                </button>
+                <button *ngIf="course.price == 0"
+                  class="w-100 btn btn-cart font-weight-bold py-2"
+                  (click)="learnFreeCourse(course._id)"
+                >
+                  LEARN NOW
+                </button>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div *ngIf="course.lessons" class="row" style="overflow: auto;">
+            <div class="col-12 videowrapper" *ngIf="srcYoutube">
+              <iframe
+                class="px-3"
+                [src]="srcYoutube"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="w-50 mx-auto lesson-list mt-4 mb-2 py-3">
+              <div class="col-12 h5 title-lesson">
+                <i class="fa fa-bars" aria-hidden="true"></i> LESSON LIST
+              </div>
+              <hr />
+              <div class="col-12">
+                <div
+                  class="col-12 py-2 cursor-pointer"
+                  (click)="updateVideoUrl(lesson.youtubeCode)"
+                  *ngFor="let lesson of course.lessons"
+                >
+                  {{ lesson.name }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div class="container my-4">
+            <div class="row h3 text-muted mb-4">Reviews</div>
+            <div *ngIf="course.reviews" class="review">
+              <div
+                class="row justify-content-center"
+                *ngFor="let review of course.reviews"
+              >
+                <div class="row col-10 px-0">
+                  <div class="col-auto text-muted my-2">
+                    {{ review.userName }}
+                  </div>
+                  <div class="col-auto my-2">
+                    <rating
+                      style="font-size: 18px;"
+                      class="text-center rating"
+                      [ngModel]="review.rating"
+                      [max]="maxRating"
+                      readonly="true"
+                    >
+                    </rating>
+                  </div>
+                  <div class="col ml-auto text-right my-2">
+                    <span class="font-italic text-muted">{{
+                      review.createdOn | date: "MMM d, y, h:mm:ss a"
+                    }}</span>
+                  </div>
+                </div>
+                <div class="col-10">
+                  <div class="media">
+                    <img
+                      class="d-flex mr-3"
+                      style="width: 60px; height: 60px; border-radius: 100%;"
+                      src="http://i.pravatar.cc/300"
+                      alt="Recipe author avatar"
+                    />
+                    <div class="media-body">
+                      {{ review.comment }}
+                    </div>
+                  </div>
+                  <hr />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mx-auto rate-me">
+            <div class="col-12 h3 text-center mt-4 text-rate font-weight-bold">
+              RATE ME
+            </div>
+            <rating
+              (onHover)="hoveringOver($event)"
+              class="col-12 text-center rating-user"
+              [(ngModel)]="rate"
+              [max]="maxRating"
+              [readonly]="isReadonly"
+            ></rating>
+            <div
+              *ngIf="rate == null"
+              class="col-12 h3 text-center mb-4 mt-2 text-rate"
+            >
+              {{ hoverRate }} <i class="ion ion-star text-rate"></i>
+            </div>
+            <div
+              *ngIf="rate > 0"
+              class="col-12 h3 text-center mb-4 mt-2 text-rate"
+            >
+              {{ rate }} <i class="ion ion-star text-rate"></i>
+            </div>
+          </div>
+          <hr />
+
+          <h3 class="mb-3 mt-3 text-muted">Leave a review</h3>
+          <textarea
+            [(ngModel)]="comment"
+            cols="5"
+            rows="5"
+            class="form-control"
+            placeholder="Leave a review for this recipe..."
+          ></textarea>
+          <button
+            class="btn btn-search btn-sm mt-3 float-right"
+            (click)="addReview()"
+          >
+            Save review
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-3" *ngIf="personalCourses.length > 0">
+      <h4 class="text-center my-color" *ngIf="recommendCourses">Recommend For You</h4>
+      <div class="row here" *ngIf="recommendCourses">
+        <div class="scrollbar sbId">
+          <div class="mb-3" *ngFor="let item of recommendCourses">
+            <div class="img-zoom">
+              <img
+                routerLink="/course/{{ item.course._id }}"
+                class="card-img-top"
+                style="cursor: pointer;"
+                src="../../assets/img/{{ item.course.imgPath }}"
+                alt="Card image cap"
+              />
+            </div>
+            <div class="card-body" style="padding: 5px;">
+              <h6 class="card-title text-center">
+                <a href="/course/{{ item.course._id }}" style="color: black;">{{
+                  item.course.name
+                }}</a>
+              </h6>
+              <div
+                style="cursor: pointer;"
+                class="border-price my-3"
+                routerLink="/course/{{ item.course._id }}"
+              >
+                <p class="h5 text-center text-danger">
+                  {{ item.course.view }}
+                </p>
+              </div>
+              <p class="h6 text-center">
+                <span class="mr-3 h5"
+                  ><i class="fa fa-comments-o"></i>
+                  {{ item.course.reviews.length }}
+                </span>
+                <span class="mr-3 h5"
+                  ><i class="ion ion-star"></i> {{ item.course.rating }}
+                </span>
+                <span class="mr-3 h5"
+                  ><i class="fa fa-shopping-cart"></i>
+                  {{ item.course.purchasedCount }}
+                </span>
+              </p>
+            </div>
+            <hr style="margin: 0.5rem;" />
+          </div>
+        </div>
+      </div>
+      <hr *ngIf="recommendCourses"/>
+      <h4 class="text-center my-color mb-2 mt-4">Similar Courses</h4>
+      <div class="row here">
+        <div class="scrollbar sbId">
+          <div class="mb-3" *ngFor="let item of similarCourses">
+            <div class="img-zoom">
+              <img
+                routerLink="/course/{{ item.course._id }}"
+                class="card-img-top"
+                style="cursor: pointer;"
+                src="../../assets/img/{{ item.course.imgPath }}"
+                alt="Card image cap"
+              />
+            </div>
+            <div class="card-body" style="padding: 5px;">
+              <h6 class="card-title text-center">
+                <a href="/course/{{ item.course._id }}" style="color: black;">{{
+                  item.course.name
+                }}</a>
+              </h6>
+              <div
+                style="cursor: pointer;"
+                class="border-price my-3"
+                routerLink="/course/{{ item.course._id }}"
+              >
+                <p class="h5 text-center text-danger">
+                  {{ item.course.view }}
+                </p>
+              </div>
+              <p class="h6 text-center">
+                <span class="mr-3 h5"
+                  ><i class="fa fa-comments-o"></i>
+                  {{ item.course.reviews.length }}
+                </span>
+                <span class="mr-3 h5"
+                  ><i class="ion ion-star"></i> {{ item.course.rating }}
+                </span>
+                <span class="mr-3 h5"
+                  ><i class="fa fa-shopping-cart"></i>
+                  {{ item.course.purchasedCount }}
+                </span>
+              </p>
+            </div>
+            <hr style="margin: 0.5rem;" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,134 @@
+<nav
+  class="navbar navbar-expand-lg navbar-custom top-menu"
+  style="
+    background-color: rgb(38, 56, 50);
+    border-bottom: 1px solid white;
+    height: 70px;
+    opacity: 1;
+    background-image: radial-gradient(
+      circle at 65% 50%,
+      rgba(216, 89, 195, 0),
+      rgba(216, 89, 195, 0) 37%,
+      #d42768 72%
+    );
+  "
+>
+  <a class="navbar-brand" href>
+    <img
+      src="../assets/img/logo2.png"
+      class="navbar-logo-img mr-2"
+      style="width: 250px; height: 65px; padding-bottom: 5px;"
+      alt=""
+    />
+  </a>
+
+  <!-- <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button> -->
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item mr-3" *ngIf="user && user.isAdmin">
+        <a class="nav-link hover-color" href="/admin"
+          >Admin <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item">
+        <div class="btn-group col-auto">
+          <button
+            class="btn category dropdown-toggle hover-color"
+            type="button"
+            data-toggle="dropdown"
+          >
+            Category
+          </button>
+          <div class="dropdown-menu" style="margin-top: 10px;">
+            <a
+              class="dropdown-item hover-color"
+              href="/courses/cat/{{ item._id }}"
+              *ngFor="let item of categories"
+              >{{ item.name }}</a
+            >
+          </div>
+        </div>
+      </li>
+      <li class="nav-item mr-3">
+        <a class="nav-link hover-color" href="/courses"
+          >Courses <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <form class="form-inline my-2 my-lg-0">
+        <input
+          [typeahead]="courses"
+          [(ngModel)]="course"
+          name="course"
+          class="form-control mr-sm-2"
+          typeaheadOptionField="name"
+          type="text"
+          placeholder="Search"
+          aria-label="Search"
+          (typeaheadOnSelect)="selectCourse($event)"
+        />
+        <i class="fa fa-search btn-search" aria-hidden="true"></i>
+      </form>
+      <li class="nav-item px-1" *ngIf="user">
+        <div class="btn-group col-auto">
+          <button class="btn" type="button" data-toggle="dropdown">
+            <img
+              style="width: 30px; border-radius: 100%; text-align: center;"
+              src="http://i.pravatar.cc/500"
+              alt="Recipe author avatar"
+            />
+          </button>
+          <div class="dropdown-menu" style="margin-top: 12px; width: 180px">
+            <span class="dropdown-item">{{ user.name }}</span>
+            <hr />
+            <span style="cursor: pointer;"
+              class="dropdown-item hover-color font-weight-bold"
+              routerLink="/profile"
+              >Profile</span
+            >
+            <span style="cursor: pointer;"
+              class="dropdown-item hover-color font-weight-bold"
+              (click)="logoutUser()"
+              >Logout</span
+            >
+          </div>
+        </div>
+      </li>
+      <li class="nav-item px-1" *ngIf="user" routerLink="/cart">
+        <div class="nav-link create-recipe-link cursor-pointer hover-color">
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+          Cart
+        </div>
+      </li>
+      <li class="nav-item px-2" *ngIf="!user">
+        <div
+          class="nav-link create-recipe-link cursor-pointer hover-color"
+          (click)="openModalLogin()"
+        >
+          Login
+        </div>
+      </li>
+      <li class="nav-item px-2" *ngIf="!user">
+        <div
+          class="nav-link create-recipe-link cursor-pointer hover-color"
+          (click)="openModalRegister()"
+        >
+          Register
+        </div>
+      </li>
+     
+    </ul>
+  </div>
+</nav>
+<div style="width: 100%; height: 70px;"></div>
+<router-outlet></router-outlet>

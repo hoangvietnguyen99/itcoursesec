@@ -1,0 +1,90 @@
+<div class="container my-5" *ngIf="user">
+  <div class="row">
+    <div class="col-lg-12 col-md-8">
+      <div style="text-align: center;">
+        <img
+          style="
+            width: 200px;
+            height: 200px;
+            border-radius: 100%;
+            text-align: center;
+          "
+          src="http://i.pravatar.cc/500"
+          alt="Recipe author avatar"
+        />
+      </div>
+      <div class="col-12 text-center">
+        <h1 class="header-color my-color">Name: {{ user.name }}</h1>
+        <h3 class="header-color my-color">Email: {{ user.email }}</h3>
+      </div>
+      <p class="text-center my-4">
+        <span class="h6 mr-3">Purchased Courses: </span>
+        <span class="mr-3 h2 header-color my-color">
+          {{ user.purchasedCourseIds.length }}
+        </span>
+      </p>
+      <p class="text-center my-4">
+        <span class="h6 mr-3">Total Spent: </span>
+        <span class="mr-3 h2 header-color my-color">
+          {{ user.totalSpend }} VND
+        </span>
+      </p>
+    </div>
+  </div>
+  <hr />
+  <h1 class="text-center my-5 display-4 my-color font-weight-bold">
+    Your Course
+  </h1>
+  <div class="row">
+    <div class="col-4" *ngFor="let item of lsCourses">
+      <div class="card mb-3">
+        <div class="img-zoom">
+          <img
+            routerLink="/course/{{ item._id }}"
+            class="card-img-top"
+            style="height: 220px; cursor: pointer;"
+            src="../../assets/img/{{ item.imgPath }}"
+            alt="Card image cap"
+          />
+        </div>
+        <div class="card-body">
+          <h5 class="card-title text-center" style="height: 60px;">
+            <a href="/course/{{ item._id }}">{{ item.name }}</a>
+          </h5>
+          <hr />
+          <p class="text-sm mb-2" style="height: 40px;">
+            <span class="text-muted float-right">
+              <i class="ion ion-clock"></i>
+              {{ item.uploadDate | date }}
+            </span>
+            <small class="font-italic">
+              <span class="text-muted">tag</span>
+              <span *ngFor="let tag of item.tags"> {{ tag }},</span>
+            </small>
+          </p>
+          <div
+            style="cursor: pointer;"
+            class="border-price my-3"
+            routerLink="/course/{{ item._id }}"
+          >
+            <p class="h5 text-center text-danger">
+              {{ item.view }}
+            </p>
+          </div>
+          <p class="h6 text-center">
+            <span class="mr-3 h5"
+              ><i class="fa fa-comments-o"></i> {{ item.reviews.length }}
+            </span>
+            <span class="mr-3 h5"
+              ><i class="ion ion-star"></i> {{ item.rating }}
+            </span>
+            <span class="mr-3 h5"
+              ><i class="fa fa-shopping-cart"></i> {{ item.purchasedCount }}
+            </span>
+          </p>
+        </div>
+      </div>
+      <br />
+    </div>
+  </div>
+</div>

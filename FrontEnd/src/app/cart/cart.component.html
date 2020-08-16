@@ -1,0 +1,129 @@
+<div class="container mb-4">
+  <div class="row my-3">
+    <h1 class="col-12 text-center">YOUR CURRENT CART</h1>
+  </div>
+  <hr />
+  <div class="row w-100" *ngIf="loading">
+    <div class="lds-roller col-auto mx-auto">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <div *ngIf="!paidFor && !loading" class="row">
+    <div class="col-12">
+      <div class="table-responsive table-hover">
+        <table class="table table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Product</th>
+              <th scope="col">Available</th>
+              <th scope="col" class="text-right">Price</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of CartByUser.items">
+              <td><img src="https://dummyimage.com/50x50/55595c/fff" /></td>
+              <td>{{ item.courseName }}</td>
+              <td>In stock</td>
+              <td class="text-right">{{ item.coursePrice }} VND</td>
+              <td class="text-right">
+                <button
+                  class="btn btn-sm btn-danger"
+                  (click)="openModal(isDelete)"
+                >
+                  <i class="fa fa-trash"></i>
+                </button>
+                <ng-template #isDelete>
+                  <div class="modal-body text-center">
+                    <p>Are you sure to delete this course?</p>
+                    <button
+                      type="button"
+                      class="btn btn-default"
+                      (click)="deleteCartItem(item)"
+                    >
+                      Yes
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      (click)="modalRef.hide()"
+                    >
+                      No
+                    </button>
+                  </div>
+                </ng-template>
+              </td>
+            </tr>
+
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><strong>Total</strong></td>
+              <td class="text-right">
+                <strong>{{ CartByUser.total }} VND</strong>
+              </td>
+            </tr>
+
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><strong>Total after promoted</strong></td>
+              <td class="text-right">
+                <strong>{{ CartByUser.totalAfterPromoted }} VND</strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col mb-2">
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <button class="btn btn-lg btn-submit w-100" routerLink="/courses">
+            Continue Shopping
+          </button>
+        </div>
+        <div class="col-sm-12 col-md-6 my-auto">
+          <div class="row" style="padding: 0 15px;">
+            <div class="col-auto my-auto">Promotion code:</div>
+            <div class="col">
+              <input
+                type="text"
+                [(ngModel)]="promotionCode"
+                class="form-control"
+              />
+            </div>
+            <div class="col-auto p-0">
+              <button
+                class="btn"
+                [class.btn-submit]="promotionCode"
+                [class.btn-submitCode]="!promotionCode"
+                [disabled]="!promotionCode"
+                (click)="addPromotion()"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row my-2">
+    <div class="col-6 mx-auto payment">
+      <div class="text-center h4 font-weight-bold">Pay</div>
+      <hr />
+      <div [hidden]="paidFor" #paypal></div>
+    </div>
+  </div>
+</div>

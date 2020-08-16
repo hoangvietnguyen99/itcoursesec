@@ -1,0 +1,28 @@
+.category {
+  border-radius: 5px;
+  color: white;
+  background-color: rgb(38, 56, 50);
+  font-weight: bold;
+}
+
+.dropdown-menu.show {
+  width: 100%;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.top-menu {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 100;
+}
+.btn-search {
+  color: aliceblue;
+  font-size: 25px;
+  margin-right: 10px;
+}
+.hover-color:hover {
+  color: palevioletred !important;
+  border-color: palevioletred;
+}

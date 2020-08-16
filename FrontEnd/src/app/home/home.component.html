@@ -1,0 +1,214 @@
+<div class="container-fluid">
+  <div
+    id="jumbotron"
+    class="jumbotron row"
+    style="
+      background-image: url('../../assets/img/banner.png');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+    "
+  >
+    <div class="col-12" style="height: 42%;"></div>
+
+    <div class="col-12 mx-auto" style="text-align: center;">
+      <a class="font-weight-bold btn btn-learn mx-auto" href="#freeCode">
+        LEARN FOR FREE
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <img class="sale mx-auto" src="../../assets/img/sale1.png" />
+  </div>
+  <div class="container-fluid px-5 my-2">
+    <h1
+      class="display-4 text-center my-2 wow fadeInDown my-color"
+      style="padding: 10px 0px;"
+    >
+      <i class="ion ion-star my-color"></i>
+      Top Rated Courses
+    </h1>
+    <br />
+    <div class="card-deck wow fadeIn my-color" data-wow-duration="4s">
+      <div class="col-3" *ngFor="let item of topRateCourses">
+        <div class="card mb-3">
+          <div class="img-zoom">
+            <img
+              class="card-img-top"
+              style="height: 200px; cursor: pointer;"
+              src="../../assets/img/{{ item.imgPath }}"
+              alt="Card image cap"
+            />
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center" style="height: 60px;">
+              <a href="/course/{{ item._id }}">{{ item.name }}</a>
+            </h5>
+            <hr />
+            <p class="text-sm mb-2" style="height: 40px;">
+              <span class="text-muted float-right">
+                <i class="ion ion-clock"></i>
+                {{ item.uploadDate | date }}</span
+              >
+              <small class="font-italic">
+                <span class="text-muted">tag</span>
+                <span *ngFor="let tag of item.tags"> {{ tag }},</span>
+              </small>
+            </p>
+            <!-- todo: payroll link -->
+            <div class="border-price my-3" routerLink="/course/{{ item._id }}">
+              <p class="h5 text-center text-danger">
+                {{ item.view }}
+              </p>
+            </div>
+            <p class="h6 text-center">
+              <span class="mr-3 h5"
+                ><i class="fa fa-comments-o"></i> {{ item.reviews.length }}
+              </span>
+              <span class="mr-3 h5"
+                ><i class="ion ion-star"></i> {{ item.rating }}
+              </span>
+              <span class="mr-3 h5"
+                ><i class="fa fa-shopping-cart"></i> {{ item.purchasedCount }}
+              </span>
+            </p>
+          </div>
+        </div>
+        <br />
+      </div>
+    </div>
+    <div class="read-seller">
+      <button class="btn" routerLink="/courses/sort/0">View more</button>
+    </div>
+  </div>
+
+  <div class="container-fluid px-5 my-2">
+    <hr />
+    <h1
+      class="display-4 text-center my-2 wow fadeInDown my-color"
+      style="padding: 10px 0px;"
+    >
+      <i class="ion ion-heart my-color"></i>
+      Most favorited Courses
+    </h1>
+    <br />
+    <div class="card-deck wow fadeIn my-color" data-wow-duration="4s">
+      <div class="col-3" *ngFor="let item of topFavorites">
+        <div class="card mb-3">
+          <div class="img-zoom">
+            <img
+              class="card-img-top"
+              style="height: 200px; cursor: pointer;"
+              src="../../assets/img/{{ item.imgPath }}"
+              alt="Card image cap"
+            />
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center" style="height: 60px;">
+              <a href="/course/{{ item._id }}">{{ item.name }}</a>
+            </h5>
+            <hr />
+            <p class="text-sm mb-2" style="height: 40px;">
+              <span class="text-muted float-right">
+                <i class="ion ion-clock"></i>
+                {{ item.uploadDate | date }}</span
+              >
+              <small class="font-italic">
+                <span class="text-muted">tag</span>
+                <span *ngFor="let tag of item.tags"> {{ tag }},</span>
+              </small>
+            </p>
+            <!-- todo: payroll link -->
+            <div class="border-price my-3" routerLink="/course/{{ item._id }}">
+              <p class="h5 text-center text-danger">
+                {{ item.view }}
+              </p>
+            </div>
+            <p class="h6 text-center">
+              <span class="mr-3 h5"
+                ><i class="fa fa-comments-o"></i> {{ item.reviews.length }}
+              </span>
+              <span class="mr-3 h5"
+                ><i class="ion ion-star"></i> {{ item.rating }}
+              </span>
+              <span class="mr-3 h5"
+                ><i class="fa fa-shopping-cart"></i> {{ item.purchasedCount }}
+              </span>
+            </p>
+          </div>
+        </div>
+        <br />
+      </div>
+    </div>
+    <div class="read-seller" id="freeCode" routerLink="/courses/sort/1">
+      <button class="btn">View more</button>
+    </div>
+  </div>
+
+  <div class="container-fluid px-5 my-2">
+    <hr />
+    <h1
+      class="display-4 text-center my-2 wow fadeInDown my-color"
+      style="padding: 10px 0px;"
+    >
+      <i class="fa fa-hand-o-right my-color"></i>
+      Top Free Courses
+    </h1>
+    <br />
+    <div class="card-deck wow fadeIn my-color" data-wow-duration="4s">
+      <div class="col-3" *ngFor="let item of topFreeCourses">
+        <div class="card mb-3">
+          <div class="img-zoom">
+            <img
+              class="card-img-top"
+              style="height: 200px; cursor: pointer;"
+              src="../../assets/img/{{ item.imgPath }}"
+              alt="Card image cap"
+            />
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center" style="height: 60px;">
+              <a href="/course/{{ item._id }}">{{ item.name }}</a>
+            </h5>
+            <hr />
+            <p class="text-sm mb-2" style="height: 40px;">
+              <span class="text-muted float-right">
+                <i class="ion ion-clock"></i>
+                {{ item.uploadDate | date }}</span
+              >
+              <small class="font-italic">
+                <span class="text-muted">tag</span>
+                <span *ngFor="let tag of item.tags"> {{ tag }},</span>
+              </small>
+            </p>
+            <!-- todo: payroll link -->
+            <div class="border-price my-3" routerLink="/course/{{ item._id }}">
+              <p class="h5 text-center text-danger">
+                {{ item.view }}
+              </p>
+            </div>
+            <p class="h6 text-center">
+              <span class="mr-3 h5"
+                ><i class="fa fa-comments-o"></i> {{ item.reviews.length }}
+              </span>
+              <span class="mr-3 h5"
+                ><i class="ion ion-star"></i> {{ item.rating }}
+              </span>
+              <span class="mr-3 h5"
+                ><i class="fa fa-shopping-cart"></i> {{ item.purchasedCount }}
+              </span>
+            </p>
+          </div>
+        </div>
+        <br />
+      </div>
+    </div>
+    <div class="read-seller">
+      <button class="btn" routerLink="/courses/sort/2">View more</button>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>IT-Course by 20A02</p>
+</footer>

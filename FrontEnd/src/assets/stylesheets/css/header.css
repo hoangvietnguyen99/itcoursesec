@@ -1,0 +1,19 @@
+.category{
+    border-radius: 5px;
+    border-color: white;
+    color: white;
+    background-color: #E27C3E;
+    font-weight: bold;
+}
+.read-seller{
+    text-align: right;
+    margin-bottom: 10px;
+}
+.read-seller button{
+    background-color: whitesmoke;
+    border:2px solid #E27C3E;
+    border-radius: 5px;
+    color: #E27C3E;
+    font-weight: bold;
+    width: 200px;
+}

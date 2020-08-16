@@ -1,0 +1,31 @@
+.btn-submit {
+  background-color: whitesmoke;
+  border: 1px solid rgb(42, 58, 40);
+  border-radius: 5px;
+  color: rgb(42, 58, 40);
+  font-weight: bold;
+}
+.btn-submitCode {
+  background-color: whitesmoke;
+  border: 1px solid rgb(42, 58, 40);
+  border-radius: 5px;
+  color: rgb(42, 58, 40);
+  font-weight: bold;
+}
+.btn-submit:hover {
+  border-color: palevioletred;
+  color: palevioletred;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.payment {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.payment:hover {
+  border-color: palevioletred;
+  color: palevioletred;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}

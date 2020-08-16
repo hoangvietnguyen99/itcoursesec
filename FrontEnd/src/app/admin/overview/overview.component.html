@@ -1,0 +1,72 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-auto h1 font-weight-bold m-2 mb-4 mx-auto">
+      Overview about ITCOURSESEC
+    </div>
+  </div>
+  <div class="row w-100" *ngIf="loading1 && loading2">
+    <div class="lds-roller col-auto mx-auto">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <div *ngIf="!loading1 && !loading2">
+    <div class="row">
+      <div class="col-auto mx-auto">
+        <ngx-charts-line-chart
+          [view]="view"
+          [legend]="legend"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxis]="xAxis"
+          [yAxis]="yAxis"
+          [timeline]="timeline"
+          [results]="multi"
+          (select)="onSelect($event)"
+          (activate)="onActivate($event)"
+          (deactivate)="onDeactivate($event)"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+        >
+        </ngx-charts-line-chart>
+      </div>
+    </div>
+    <div class="row title">
+      <div class="col-auto mx-auto text-muted font-italic">Trending 2020</div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-auto mx-auto">
+        <ngx-charts-bar-vertical
+          [legend]="legend"
+          [view]="view"
+          [results]="revenues"
+          [xAxis]="xAxis"
+          [yAxis]="yAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [roundEdges]="false"
+          [xAxisLabel]="xAxisLabel1"
+          [yAxisLabel]="yAxisLabel1"
+        >
+        </ngx-charts-bar-vertical>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-auto mx-auto mb-5 text-muted font-italic">
+        Revenues of 2020
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-auto mx-auto mb-5 text-muted font-italic">
+        Total amount of 2020: {{ totalYear }}
+      </div>
+    </div>
+  </div>
+</div>

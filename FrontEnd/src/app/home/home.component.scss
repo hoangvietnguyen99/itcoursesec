@@ -1,0 +1,55 @@
+.read-seller {
+  text-align: right;
+  margin-bottom: 10px;
+}
+.read-seller button {
+  background-color: whitesmoke;
+  border: 2px solid rgb(42, 58, 40);
+  border-radius: 5px;
+  color: rgb(42, 58, 40);
+  font-weight: bold;
+  width: 200px;
+}
+.read-seller button:hover {
+  border-color: palevioletred;
+  color: palevioletred;
+}
+
+.my-color {
+  color: rgb(51, 71, 49);
+  a {
+    color: rgb(51, 71, 49);
+  }
+}
+.footer {
+  background-color: rgb(48, 66, 45);
+}
+.sale:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+.btn-learn {
+  border: 2px solid white;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 50px;
+  font-size: 30px;
+}
+.btn-learn:hover {
+  border-color: palevioletred;
+  color: palevioletred;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.19), 0 6px 6px rgba(248, 246, 246, 0.23);
+
+}
+ .card-deck .card {
+   margin: 0px;
+}
+.border-price{
+  border: 1px solid palevioletred;
+  border-radius: 5px;
+  padding: 10px 0px;
+  p{margin:0px}
+}
+.border-price:hover{
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  cursor: pointer;
+}
