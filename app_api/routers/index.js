@@ -229,10 +229,10 @@ router.post("/register", authenticationController.register);
 router.post("/login", authenticationController.login);
 
 router.route('/analytic/revenue')
-  .post(auth, analyticsController.getRevenueOfYear);
+  .post(auth, analyticsController.getRevenueAYearBeforeToday);
 
 router.route('/analytic/trendtags')
-  .post(auth, analyticsController.getTrendTagsData);
+  .post(auth, analyticsController.getTrendTagsDataV2);
 
 // router.post("/uploadimg", multipartyMiddleware, (req, res) => {
 //   console.log(req.body, req.files)
